@@ -1,0 +1,11 @@
+.uList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding-left: 0;
+}
+.uList:li {
+  flex: 0 0 calc(25% - 10px);
+  max-width: calc(25% - 10px);
+}
