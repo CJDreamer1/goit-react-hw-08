@@ -1,18 +1,39 @@
-export const changeLang = (newLang) => {
-  return {
-    type: "locale/changeLang",
-    payload: newLang,
-  };
-};
-export const localeReducer = (state = { lang: "uk" }, action) => {
-  switch (action.type) {
-    case "locale/changeLang":
-      return {
-        ...state,
-        lang: action.payload,
-      };
+import { createSlice } from "@reduxjs/toolkit";
 
-    default:
-      return state;
-  }
-};
+const slice = createSlice({
+  name: "locale",
+  initialState: { lang: "uk" },
+  reducers: {
+    //   у випадку, якщо треба змінити payload на об`єкт:
+    // changeLang(state, action) {
+    //   state.lang = action.payload;
+    changeLang: {
+      reducer(state, action) {
+        state.lang = action.payload.lang;
+      },
+      prepare(value) {
+        return {
+          payload: {
+            id: crypto.randomUUID(),
+            lang: value,
+          },
+        };
+      },
+    },
+  },
+});
+
+export const { changeLang } = slice.actions;
+export const selectLang = (state) => state.locale.lang;
+// ^^ бест практіс називати його селектЩось. Він у нас використовується в App та в LangSwitcher в useSelector(selectLang)
+export default slice.reducer;
+
+// export const changeLang = createAction("locale/changeLang");
+// ^^ Ця штука  екшен кріейтор
+
+// export const localeReducer = createReducer({ lang: "uk" }, (builder) => {
+//   builder.addCase(changeLang, (state, action) => {
+//     state.lang = action.payload;
+//   });
+// });
+// ^^ Ця штука Редьюсер

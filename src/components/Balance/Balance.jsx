@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { deposit, withdraw } from "../../redux/balanceSlice";
+import { deposit, withdraw, selectBalance } from "../../redux/balanceSlice";
 
 export default function Balance() {
   const dispatch = useDispatch();
 
-  const value = useSelector((state) => state.balance.value);
+  const value = useSelector(selectBalance);
   // useState рендерить сторінку, коли змінюється в стані balance.value
 
   const handleDeposit = () => {
