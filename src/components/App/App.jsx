@@ -9,7 +9,7 @@ export default function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchContacts);
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (
