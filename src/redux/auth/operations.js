@@ -6,6 +6,7 @@ axios.defaults.baseURL = "https://goit-task-manager.herokuapp.com/";
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
+
 const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = "";
 };
@@ -14,7 +15,6 @@ export const register = createAsyncThunk(
   "auth/register",
   async (newUser, thunkAPI) => {
     try {
-      // res - скорочення від response тобто відповідь з серва
       const res = await axios.post("/users/signup", newUser);
       setAuthHeader(res.data.token);
       return res.data;
@@ -39,8 +39,8 @@ export const logIn = createAsyncThunk(
 
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
-    await axios.post("users/logout");
-    clearAuthHeader;
+    await axios.post("/users/logout");
+    clearAuthHeader();
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }
@@ -49,16 +49,20 @@ export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
-    const reduxState = thunkAPI.getState();
-    setAuthHeader(reduxState.auth.token);
+    const state = thunkAPI.getState();
+    const token = state.auth.token;
 
-    const res = await axios.get("users/me");
-    return res.data;
-  },
-  {
-    condition(_, thunkAPI) {
-      const reduxState = thunkAPI.getState();
-      return reduxState.auth.token !== null;
-    },
+    if (!token) {
+      return thunkAPI.rejectWithValue("No token found");
+    }
+
+    setAuthHeader(token);
+
+    try {
+      const res = await axios.get("/users/current");
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
