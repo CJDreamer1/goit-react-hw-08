@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 350px;
+  margin: 0 auto;
+}
+.logInBtn {
+  border-radius: 4px;
+  border-style: none;
+  cursor: pointer;
+  background-color: rgb(97, 97, 255);
+  color: white;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.logInBtn:hover {
+  background-color: rgb(58, 58, 255);
+  color: white;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-family: sans-serif;
+}
+
+input {
+  width: 350px;
+  padding: 8px;
+  box-sizing: border-box;
+}

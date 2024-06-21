@@ -6,7 +6,7 @@ import Layout from "../Layout/Layout";
 import HomePage from "../../Pages/HomePage/HomePage";
 import RegisterPage from "../../Pages/RegisterPage/RegisterPage";
 import LoginPage from "../../Pages/LoginPage/LoginPage";
-import ContactsPage from "../../Pages/ContactPage/ContactPage";
+import ContactsPage from "../../Pages/ContactsPage/ContactsPage";
 import PrivateRoute from "../PrivateRoute";
 import RestrictedRoute from "../RestrictedRuote";
 

@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+}
+
+.activeLink {
+  color: #ff6b6b;
+}
