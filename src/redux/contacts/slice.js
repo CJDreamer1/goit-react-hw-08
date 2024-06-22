@@ -1,6 +1,6 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { fetchContacts, addContact, deleteContact } from "./operations";
-import { selectNameFilter } from "../filters/slice";
+// import { selectNameFilter } from "../filters/selectors";
 import { logOut } from "../auth/operations";
 
 const contactsSlice = createSlice({
@@ -57,15 +57,15 @@ const contactsSlice = createSlice({
 });
 
 // Оголосити селектор для отримання списку контактів
-export const selectContacts = (state) => state.contacts.items;
+// export const selectContacts = (state) => state.contacts.items;
 
-export const selectFilteredContacts = createSelector(
-  [selectContacts, selectNameFilter],
-  (contacts, filter) =>
-    contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
-    )
-);
+// export const selectFilteredContacts = createSelector(
+//   [selectContacts, selectNameFilter],
+//   (contacts, filter) =>
+//     contacts.filter((contact) =>
+//       contact.name.toLowerCase().includes(filter.toLowerCase())
+//     )
+// );
 
 // Експортувати редуктор
 export default contactsSlice.reducer;
